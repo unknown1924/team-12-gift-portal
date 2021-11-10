@@ -17,6 +17,15 @@ public class Users {
 	@Field(name="User_username")
 	private String username;
 	
+	@Field(name="Role")
+	private String role;
+	
+	public String getRole() {
+		return role;
+	}
+	public void setRole(String role) {
+		this.role = role;
+	
 	@Field(name="User_password")
 	private String password;
 	
