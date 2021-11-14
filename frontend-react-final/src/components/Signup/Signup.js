@@ -57,7 +57,7 @@ function Login() {
 
   const axiosGetAllUser = async () => {
     try {
-      const response = await axios.get('http://localhost:8080/admin/showAllUsers');
+      const response = await axios.get('https://giftshop-1636920008628.azurewebsites.net/admin/showAllUsers');
       console.log(response);
 
       if (response.data.length == 0)
@@ -77,7 +77,7 @@ function Login() {
   }
 
   const axiosPost = async () => {
-    const response = await axios.post(`http://localhost:8080/signup`, addUserData);
+    const response = await axios.post(`https://giftshop-1636920008628.azurewebsites.net/SignUp/signup`, addUserData);
     // console.log(response);
     // refreshPage();
   }
