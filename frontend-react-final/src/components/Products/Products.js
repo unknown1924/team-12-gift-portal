@@ -17,7 +17,7 @@ function Product() {
 
   const axiosGet = async () => {
 
-    const response = await axios.get(`http://localhost:8080/admin/getGifts`);
+    const response = await axios.get(`https://giftshop-1636920008628.azurewebsites.net/admin/getGifts`);
     console.log("Products")
 
     setMenu(response.data);
