@@ -49,7 +49,7 @@ function Admin() {
 
   // GET: Fetch All user list
   const axiosGet = async () => {
-    const response = await axios.get(`http://localhost:8080/admin/sortUsersAsc`);
+    const response = await axios.get(`https://giftshop-1636920008628.azurewebsites.net/admin/sortUsersAsc`);
     // console.log("Admin")
     // console.log(response);
     setUsers(response.data);
@@ -58,7 +58,7 @@ function Admin() {
 
   // POST: Add new user
   const axiosPost = async () => {
-    const response = await axios.post(`http://localhost:8080/admin/addUser`, addUserData);
+    const response = await axios.post(`https://giftshop-1636920008628.azurewebsites.net/admin/addUser`, addUserData);
     // console.log(response);
     refreshPage();
   }
@@ -67,14 +67,14 @@ function Admin() {
 
   // PUT: update user data by userId
   const axiosPutUserId = async () => {
-    const response = await axios.put(`http://localhost:8080/admin/updateUser/${addUserData.userId}`, addUserData);
+    const response = await axios.put(`https://giftshop-1636920008628.azurewebsites.net/admin/updateUser/${addUserData.userId}`, addUserData);
     console.log(response);
     refreshPage();
   }
 
 
   // const axiosPutByUserName = async () => {
-  //   const response = await axios.put(`http://localhost:8080/admin/updateUser/admin/updateUserByName/${updateUserData.username}`, userName);
+  //   const response = await axios.put(`https://giftshop-1636920008628.azurewebsites.net/admin/updateUser/admin/updateUserByName/${updateUserData.username}`, userName);
   //   console.log(response);
   //   refreshPage();
   // }
@@ -82,7 +82,7 @@ function Admin() {
 
   // DELETE: delete user by userId
   const axiosDeleteByUserId = async (key) => {
-    const response = await axios.delete(`http://localhost:8080/admin/deleteUser/${key}`);
+    const response = await axios.delete(`https://giftshop-1636920008628.azurewebsites.net/admin/deleteUser/${key}`);
     console.log("Delete success!")
     console.log(key)
     refreshPage();
