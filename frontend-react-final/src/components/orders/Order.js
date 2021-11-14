@@ -30,7 +30,7 @@ function Order() {
 
     const axiosGetOrderList = async () => {
         try {
-            const response = await axios.get(`${url}/user/${user}/seeOrders`);
+            const response = await axios.get(`https://giftshop-1636920008628.azurewebsites.net/user/${user}/seeOrders`);
             console.log(response);
             setOrders(response.data);
             // if (!response) {
