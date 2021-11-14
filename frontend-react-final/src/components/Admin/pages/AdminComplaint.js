@@ -29,7 +29,7 @@ function AdminComplaint() {
 
     // GET: Fetch All user list
     const axiosGet = async () => {
-        const response = await axios.get(`http://localhost:8080/admin/showAllComplaints`);
+        const response = await axios.get(`https://giftshop-1636920008628.azurewebsites.net/admin/showAllComplaints`);
         // console.log("Admin")
         // console.log(response);
         setUsers(response.data);
@@ -38,7 +38,7 @@ function AdminComplaint() {
 
     // POST: Add new user
     const axiosPost = async () => {
-        const response = await axios.post(`http://localhost:8080/admin/addUser`, addUserData);
+        const response = await axios.post(`https://giftshop-1636920008628.azurewebsites.net/admin/addUser`, addUserData);
         // console.log(response);
         refreshPage();
     }
@@ -49,7 +49,7 @@ function AdminComplaint() {
     const axiosDeleteByUserId = async (key) => {
 
         try {
-            const response = await axios.delete(`/admin/deleteOrder/${key}`);
+            const response = await axios.delete(`https://giftshop-1636920008628.azurewebsites.net/admin/deleteOrder/${key}`);
             console.log(response)
             // console.log("Delete success!")
             console.log(key)
