@@ -26,7 +26,7 @@ function RaiseComplaint() {
 
 
   const axiosGetAllComplaint = async () => {
-    const response = await axios.get(`http://localhost:8080/user/${user}/seeComplaint`);
+    const response = await axios.get(`https://giftshop-1636920008628.azurewebsites.net/user/${user}/seeComplaint`);
     console.log(response);
     // setUsers(response.data);
     setComplaints(response.data)
@@ -34,7 +34,7 @@ function RaiseComplaint() {
   }
 
   const axiosPostComplaint = async () => {
-    const response = await axios.post(`http://localhost:8080/user/${user}/addComplaint/${orderId}`, { compMessage: complaint });
+    const response = await axios.post(`https://giftshop-1636920008628.azurewebsites.net/user/${user}/addComplaint/${orderId}`, { compMessage: complaint });
     console.log(response);
     refreshPage();
   }
