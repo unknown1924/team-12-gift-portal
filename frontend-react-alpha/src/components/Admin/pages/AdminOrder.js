@@ -35,24 +35,6 @@ function AdminOrder() {
         setUsers(response.data);
         setLoading(false);
     }
-    const axiosGetOrdersAsc = async () => {
-        const response = await axios.get(`http://localhost:8080/admin/sortOrdersAsc`);
-        // console.log("Admin")
-        console.log(response);
-        setUsers(response.data);
-        setLoading(false);
-        // refreshPage();
-    }
-
-    // axiosGetOrdersAsc();
-    const axiosGetOrdersDesc = async () => {
-        const response = await axios.get(`http://localhost:8080/admin/sortOrdersDesc`);
-        // console.log("Admin")
-        console.log(response);
-        setUsers(response.data);
-        setLoading(false);
-        // refreshPage();
-    }
 
     // POST: Add new user
     const axiosPost = async () => {
@@ -102,12 +84,6 @@ function AdminOrder() {
         // }
     }
 
-    const axiosPutUserId = async (id) => {
-        const response = await axios.put(`http://localhost:8080/admin/updateOrder/${id}`, addUserData);
-        console.log(response);
-        refreshPage();
-    }
-
     const handleDelete = (e, key) => {
         e.preventDefault();
         console.log(key)
@@ -116,20 +92,9 @@ function AdminOrder() {
         axiosDeleteByUserId(users[key].orderId);
     }
 
-    const handleUpdate = (e, key) => {
-        axiosPutUserId(users[key].orderId)
-    }
-
     const refreshPage = () => {
         setLoading(true);
         axiosGet();
-    }
-
-    const sortAsc = () => {
-        axiosGetOrdersAsc();
-    }
-    const sortDesc = () => {
-        axiosGetOrdersDesc();
     }
 
     // {/* <AdminNavbar /> */}
@@ -141,10 +106,8 @@ function AdminOrder() {
 
                 <h1 style={{ textAlign: "center" }}>Orders</h1>
 
-                <div style={{margin: "10px"}} class="btn-group" role="group" aria-label="Basic example">
-                    <button onClick={sortAsc} type="button" class="btn btn-primary">Asc</button>
-                    <button onClick={sortDesc} type="button" class="btn btn-primary">Desc</button>
-                </div>
+
+
 
 
                 <table class="table align-middle table-hover">
@@ -225,14 +188,13 @@ function AdminOrder() {
 
                                             <td>
                                                 <div class="btn-group" role="group">
-                                                    <button
-                                                        type="button"
-                                                        class="btn btn-success"
-                                                        // onClick={e => handleEdit(e, key, userName, nameOfUser, userPassword, userEmailId)}
-                                                        onClick={e => handleUpdate(e, key)}
-                                                    >
-                                                        ✔️
-                                                    </button>
+                                                    {/* <button
+                                                    type="button"
+                                                    class="btn btn-primary"
+                                                    onClick={e => handleEdit(e, key, userName, nameOfUser, userPassword, userEmailId)}
+                                                >
+                                                    ✏️
+                                                </button> */}
                                                     <button
                                                         type="button"
                                                         class="btn btn-danger"
@@ -254,6 +216,12 @@ function AdminOrder() {
                         )}
                     </tbody>
                 </table>
+
+
+
+
+
+
             </div>
         </>
     );

@@ -1,14 +1,10 @@
 import React, { useEffect, useState, useContext } from "react";
-import  { useHistory } from 'react-router-dom'
 import axios from "axios";
 // import { Button } from "react-bootstrap";
 import { userContext } from "../../App";
 import Navbar from '../Navbar/Navbar';
-import { Link } from "react-router-dom";
 
 function User() {
-
-  const history = useHistory();
 
   const { userData, loggedInData } = useContext(userContext);
   const [user, setUser] = userData;
@@ -142,74 +138,72 @@ function User() {
       <Navbar />
       <div className="container">
 
-        {user == "test" ? (
-          <div>{history.push("/Login")}</div>
-        ) : (
-          <div class="accordion" id="accordionExample">
-            <div class="accordion-item">
-              <h2 class="accordion-header" id="headingOne">
-                <button
-                  class="accordion-button"
-                  type="button"
-                >
-                  <button type="button" class="btn btn-dark" data-mdb-ripple-color="dark" onClick={refreshPage}>
-                    <i class="fas fa-sync"></i>
-                  </button>
 
-                  <h3> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {user}'s information</h3>
-                </button>
-              </h2>
-              <div
-                id="collapseOne"
-                class="accordion-collapse collapse show"
-                aria-labelledby="headingOne"
-                data-mdb-parent="#accordionExample"
+        <div class="accordion" id="accordionExample">
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="headingOne">
+              <button
+                class="accordion-button"
+                type="button"
               >
+                <button type="button" class="btn btn-dark" data-mdb-ripple-color="dark" onClick={refreshPage}>
+                  <i class="fas fa-sync"></i>
+                </button>
 
-                <div className="container">
-                  <div className="row">
-                    <form style={{ width: "90vw", padding: "20px" }}>
-                      <div className="form-group">
-                        <label for="exampleFormControlInput1">Email address</label>
-                        <input
-                          type="email"
-                          className="form-control"
-                          autoComplete="off"
-                          placeholder={users.userEmail}
-                          id="exampleFormControlInput1"
-                        />
-                      </div>
-                      <div className="form-group">
-                        <label for="exampleFormControlInput1">Name</label>
-                        <input
-                          type="name"
-                          className="form-control"
-                          autoComplete="off"
-                          placeholder={users.nameofUser}
-                          id="exampleFormControlInput2"
-                        />
-                      </div>
-                      <div className="form-group">
-                        <label for="exampleFormControlInput1">User Name</label>
-                        <input
-                          type="username"
-                          className="form-control"
-                          autoComplete="off"
-                          placeholder={users.username}
-                          id="exampleFormControlInput3"
-                        />
-                      </div>
-                      <div className="form-group">
-                        <label for="exampleFormControlInput1">Password</label>
-                        <input
-                          type="password"
-                          className="form-control"
-                          id="exampleFormControlInput1"
-                          placeholder={users.password}
-                          autoComplete="off"
-                        />
-                      </div>
-                      {/* <div className="form-group">
+                <h3> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {user}'s information</h3>
+              </button>
+            </h2>
+            <div
+              id="collapseOne"
+              class="accordion-collapse collapse show"
+              aria-labelledby="headingOne"
+              data-mdb-parent="#accordionExample"
+            >
+
+              <div className="container">
+                <div className="row">
+                  <form style={{ width: "90vw", padding: "20px" }}>
+                    <div className="form-group">
+                      <label for="exampleFormControlInput1">Email address</label>
+                      <input
+                        type="email"
+                        className="form-control"
+                        autoComplete="off"
+                        placeholder={users.userEmail}
+                        id="exampleFormControlInput1"
+                      />
+                    </div>
+                    <div className="form-group">
+                      <label for="exampleFormControlInput1">Name</label>
+                      <input
+                        type="name"
+                        className="form-control"
+                        autoComplete="off"
+                        placeholder={users.nameofUser}
+                        id="exampleFormControlInput2"
+                      />
+                    </div>
+                    <div className="form-group">
+                      <label for="exampleFormControlInput1">User Name</label>
+                      <input
+                        type="username"
+                        className="form-control"
+                        autoComplete="off"
+                        placeholder={users.username}
+                        id="exampleFormControlInput3"
+                      />
+                    </div>
+                    <div className="form-group">
+                      <label for="exampleFormControlInput1">Password</label>
+                      <input
+                        type="password"
+                        className="form-control"
+                        id="exampleFormControlInput1"
+                        placeholder={users.password}
+                        autoComplete="off"
+                      />
+                    </div>
+                    {/* <div className="form-group">
                       <label for="exampleFormControlInput1">Address</label>
                       <input
                         type="address"
@@ -218,25 +212,23 @@ function User() {
                         autoComplete="off"
                       />
                     </div> */}
-                      <div className="form-group">
-                        <label for="exampleFormControlInput1">Phone</label>
-                        <input
-                          type="name"
-                          className="form-control"
-                          id="exampleFormControlInput1"
-                          placeholder={users.userMobile}
-                          autoComplete="off"
-                        />
-                      </div>
-                      {/* <button className="btn btn-success"> Save Changes </button> */}
-                    </form>
-                  </div>
+                    <div className="form-group">
+                      <label for="exampleFormControlInput1">Phone</label>
+                      <input
+                        type="name"
+                        className="form-control"
+                        id="exampleFormControlInput1"
+                        placeholder={users.userMobile}
+                        autoComplete="off"
+                      />
+                    </div>
+                    {/* <button className="btn btn-success"> Save Changes </button> */}
+                  </form>
                 </div>
               </div>
             </div>
           </div>
-        )}
-
+        </div>
 
       </div>
     </>

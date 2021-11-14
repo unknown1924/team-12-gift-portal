@@ -31,27 +31,27 @@ function Login() {
 
 
   let addUserData = {
-    // "userId": null,
+    "userId": 69,
     "username": userName,
     "password": password,
     "userEmail": userEmailId,
     "nameofUser": nameOfUser,
-    "userMobile": userPhoneNo,
-    // "address": null,
-    // "order_list": [
-    //   {
-    //     "orderId": 1,
-    //     "order_date": null,
-    //     "gift_id": 0,
-    //     "order_Quant": 0,
-    //     "rx_address": null,
-    //     "rx_phone": 0,
-    //     "orderStatus": "Placed",
-    //     "surprise": false,
-    //     "total_amt": 0.0
-    //   }
-    // ],
-    // "complaint_list": null
+    "userMobile": null,
+    "address": null,
+    "order_list": [
+      {
+        "orderId": 1,
+        "order_date": null,
+        "gift_id": 0,
+        "order_Quant": 0,
+        "rx_address": null,
+        "rx_phone": 0,
+        "orderStatus": "Placed",
+        "surprise": false,
+        "total_amt": 0.0
+      }
+    ],
+    "complaint_list": null
   };
 
 
@@ -77,7 +77,7 @@ function Login() {
   }
 
   const axiosPost = async () => {
-    const response = await axios.post(`http://localhost:8080/signup`, addUserData);
+    const response = await axios.post(`http://localhost:8080/admin/addUser`, addUserData);
     // console.log(response);
     // refreshPage();
   }
@@ -114,7 +114,6 @@ function Login() {
   // validateLogIn();
 
   function handleSignin() {
-    axiosPost();
     history.push("/Home")
   }
 
@@ -133,7 +132,7 @@ function Login() {
 
   return (
     <Router>
-
+      
       <div>
         <h1 style={{ textAlign: "center" }}>Hello there New user!</h1>
 

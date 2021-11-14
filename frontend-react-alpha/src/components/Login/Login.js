@@ -81,8 +81,6 @@ function Login() {
     history.push("/Signup")
   }
 
-  // const validateLogIn
-
   const validateLogIn = () => {
     console.log(userList.length)
 
@@ -101,20 +99,13 @@ function Login() {
         history.push("/Home")
         break;
       }
-      else {
-        // alert("Invalid Credentials")
-        console.log("invalid")
-      }
+      else console.log("failed");
     }
 
   }
 
   validateLogIn();
 
-  function goToHome() {
-    setUser("test")
-    history.push("/Home")
-  }
 
   console.log(userName);
   console.log(password);
@@ -127,18 +118,13 @@ function Login() {
   return (
     <Router>
       <div>
-        <div>
-          <button onClick={goToHome} type="button" class="btn btn-outline-primary" data-mdb-ripple-color="dark" style={{ margin: "20px" }}>
-            <i class="fas fa-home"></i>
-          </button>
-          <h1 style={{ textAlign: "center" }}>Welcome Back!</h1>
-        </div>
+        <h1 style={{ textAlign: "center" }}>Welcome Back!</h1>
+        {/* <h2>{user}</h2> */}
 
         <div style={style}>
           <form>
             <div class="form-outline mb-4">
               <input type="email" id="form2Example1" class="form-control"
-                required
                 onChange={e => {
                   setUserName(e.target.value);
                 }}
@@ -148,7 +134,6 @@ function Login() {
 
             <div class="form-outline mb-4">
               <input type="password" id="form2Example2" class="form-control"
-                required
                 onChange={e => {
                   setPassword(e.target.value);
                 }}
@@ -170,9 +155,9 @@ function Login() {
                 </div>
               </div>
 
-              {/* <div class="col">
+              <div class="col">
                 <a href="#!">Forgot password?</a>
-              </div> */}
+              </div>
             </div>
 
             <Link to="/Home" onClick={handleLogin} class="btn btn-primary btn-block mb-4">Sign In</Link>

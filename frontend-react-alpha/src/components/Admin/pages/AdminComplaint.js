@@ -3,7 +3,7 @@ import axios from "axios";
 // import { Button } from "react-bootstrap";
 import AdminNavbar from "../AdminNavbar"
 
-function AdminOrder() {
+function AdminComplaint() {
 
     const [users, setUsers] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -29,29 +29,11 @@ function AdminOrder() {
 
     // GET: Fetch All user list
     const axiosGet = async () => {
-        const response = await axios.get(`http://localhost:8080/admin/showAllOrders`);
+        const response = await axios.get(`http://localhost:8080/admin/showAllComplaints`);
         // console.log("Admin")
         // console.log(response);
         setUsers(response.data);
         setLoading(false);
-    }
-    const axiosGetOrdersAsc = async () => {
-        const response = await axios.get(`http://localhost:8080/admin/sortOrdersAsc`);
-        // console.log("Admin")
-        console.log(response);
-        setUsers(response.data);
-        setLoading(false);
-        // refreshPage();
-    }
-
-    // axiosGetOrdersAsc();
-    const axiosGetOrdersDesc = async () => {
-        const response = await axios.get(`http://localhost:8080/admin/sortOrdersDesc`);
-        // console.log("Admin")
-        console.log(response);
-        setUsers(response.data);
-        setLoading(false);
-        // refreshPage();
     }
 
     // POST: Add new user
@@ -67,7 +49,7 @@ function AdminOrder() {
     const axiosDeleteByUserId = async (key) => {
 
         try {
-            const response = await axios.delete(`http://localhost:8080/admin/deleteOrder/${key}`);
+            const response = await axios.delete(`/admin/deleteOrder/${key}`);
             console.log(response)
             // console.log("Delete success!")
             console.log(key)
@@ -102,22 +84,12 @@ function AdminOrder() {
         // }
     }
 
-    const axiosPutUserId = async (id) => {
-        const response = await axios.put(`http://localhost:8080/admin/updateOrder/${id}`, addUserData);
-        console.log(response);
-        refreshPage();
-    }
-
     const handleDelete = (e, key) => {
         e.preventDefault();
         console.log(key)
         alert("Delete?");
         // setUser(users[key])
-        axiosDeleteByUserId(users[key].orderId);
-    }
-
-    const handleUpdate = (e, key) => {
-        axiosPutUserId(users[key].orderId)
+        axiosDeleteByUserId(users[key].compId);
     }
 
     const refreshPage = () => {
@@ -125,37 +97,27 @@ function AdminOrder() {
         axiosGet();
     }
 
-    const sortAsc = () => {
-        axiosGetOrdersAsc();
-    }
-    const sortDesc = () => {
-        axiosGetOrdersDesc();
-    }
-
     // {/* <AdminNavbar /> */}
 
     return (
+
         <>
             <AdminNavbar />
             <div className="container">
 
-                <h1 style={{ textAlign: "center" }}>Orders</h1>
+                <h1 style={{ textAlign: "center" }}>Complaints</h1>
 
-                <div style={{margin: "10px"}} class="btn-group" role="group" aria-label="Basic example">
-                    <button onClick={sortAsc} type="button" class="btn btn-primary">Asc</button>
-                    <button onClick={sortDesc} type="button" class="btn btn-primary">Desc</button>
-                </div>
+
+
 
 
                 <table class="table align-middle table-hover">
                     <thead>
                         <tr>
                             <th scope="col">ID</th>
-                            <th scope="col">Date</th>
-                            <th scope="col">Quantity</th>
-                            <th scope="col">Order Status</th>
-                            <th scope="col">Surprise</th>
-                            <th scope="col">Total(Rs)</th>
+                            <th scope="col">Message</th>
+                            <th scope="col">Status</th>
+                            <th scope="col">Order ID</th>
                             <th scope="col">Action</th>
                         </tr>
                     </thead>
@@ -165,45 +127,20 @@ function AdminOrder() {
                             users.map((data, key) => {
 
                                 // const { address, complaint_list, nameofUser, order_list, password, userEmail, userId, userMobile, username } = data;
-                                // const { compId, compMessage, compStatus, orderId } = data;
-                                const { orderId, order_date, gift_id, order_Quant, rx_address, rx_phone, orderStatus, surprise, total_amt } = data;
-
-                                //                     "orderId": 1,
-                                // "order_date": "2021-11-13T11:23:17.547+00:00",
-                                // "gift_id": 3,
-                                // "order_Quant": 2,
-                                // "rx_address": "Belle Vue, Chennai, India",
-                                // "rx_phone": 9769852496,
-                                // "orderStatus": "Dispatched",
-                                // "surprise": true,
-                                // "total_amt": 998.0
+                                const { compId, compMessage, compStatus, orderId } = data;
 
                                 return (
                                     <>
                                         <tr>
                                             <td>
                                                 {/* <input placeholder={userId} type="text" id="form12" class="form-control" disabled /> */}
-                                                <input placeholder={orderId} type="text" id="form12" class="form-control" disabled />
+                                                <input placeholder={compId} type="text" id="form12" class="form-control" disabled />
                                             </td>
 
                                             <td>
                                                 {/* <input placeholder={username} type="text" id="form12" class="form-control"                                            onChange={e => setUserName(e.target.value)}
                                             /> */}
-                                                <input placeholder={order_date} type="text" id="form12" class="form-control" onChange={e => setUserName(e.target.value)}
-                                                />
-                                            </td>
-
-                                            <td>
-                                                {/* <input placeholder={username} type="text" id="form12" class="form-control"                                            onChange={e => setUserName(e.target.value)}
-                                            /> */}
-                                                <input placeholder={order_Quant} type="text" id="form12" class="form-control" onChange={e => setUserName(e.target.value)}
-                                                />
-                                            </td>
-
-                                            <td>
-                                                {/* <input placeholder={username} type="text" id="form12" class="form-control"                                            onChange={e => setUserName(e.target.value)}
-                                            /> */}
-                                                <input placeholder={orderStatus} type="text" id="form12" class="form-control" onChange={e => setUserName(e.target.value)}
+                                                <input placeholder={compMessage} type="text" id="form12" class="form-control" onChange={e => setUserName(e.target.value)}
                                                 />
                                             </td>
 
@@ -211,34 +148,34 @@ function AdminOrder() {
                                                 {/* <input placeholder={nameofUser} type="text" id="form12" class="form-control"
                                                 onChange={e => setNameOfUser(e.target.value)}
                                             /> */}
-                                                <input placeholder={surprise ? "Yes" : "No"} type="text" id="form12" class="form-control"
+                                                <input placeholder={compStatus ? "Resolved" : "Pending"} type="text" id="form12" class="form-control"
                                                 // onChange={e => setNameOfUser(e.target.value)}
                                                 />
                                             </td>
 
                                             <td>
-                                                {/* <input placeholder={username} type="text" id="form12" class="form-control"                                            onChange={e => setUserName(e.target.value)}
+                                                {/* <input placeholder={userEmail} type="email" id="form12" class="form-control"
+                                                onChange={e => setUserEmailId(e.target.value)}
                                             /> */}
-                                                <input placeholder={total_amt} type="text" id="form12" class="form-control" onChange={e => setUserName(e.target.value)}
+                                                <input placeholder={orderId} type="email" id="form12" class="form-control"
+                                                    onChange={e => setUserEmailId(e.target.value)}
                                                 />
                                             </td>
-
                                             <td>
                                                 <div class="btn-group" role="group">
+                                                    {/* <button
+                                                    type="button"
+                                                    class="btn btn-primary"
+                                                    onClick={e => handleEdit(e, key, userName, nameOfUser, userPassword, userEmailId)}
+                                                >
+                                                    ✏️
+                                                </button> */}
                                                     <button
                                                         type="button"
                                                         class="btn btn-success"
-                                                        // onClick={e => handleEdit(e, key, userName, nameOfUser, userPassword, userEmailId)}
-                                                        onClick={e => handleUpdate(e, key)}
-                                                    >
-                                                        ✔️
-                                                    </button>
-                                                    <button
-                                                        type="button"
-                                                        class="btn btn-danger"
                                                         onClick={e => handleDelete(e, key)}
                                                     >
-                                                        ❌
+                                                        ✔️
                                                     </button>
                                                 </div>
                                             </td>
@@ -248,15 +185,27 @@ function AdminOrder() {
                             })
 
                         ) : (
-                            <div class="spinner-border" role="status">
+                            <div class="spinner-border" role="status"
+                                style={{
+                                    display: "flex",
+                                    justifyContent: "center",
+                                    alignItems: "center"
+                                }}
+                            >
                                 <span class="visually-hidden">Loading...</span>
                             </div>
                         )}
                     </tbody>
                 </table>
+
+
+
+
+
+
             </div>
         </>
     );
 };
 
-export default AdminOrder;
+export default AdminComplaint;

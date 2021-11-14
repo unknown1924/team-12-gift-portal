@@ -14,7 +14,7 @@ function RaiseComplaint() {
   const [orderId, setOrderId] = orderIdData;
   const [orderIdComplaint, setOrderIdComplaint] = orderIdComplaintData;
 
-  const [complaint, setComplaint] = useState("Add your Complaint here");
+  const [complaint, setComplaint] = useState(null);
   const [complaints, setComplaints] = useState([]);
 
 
@@ -45,9 +45,17 @@ function RaiseComplaint() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    axiosPostComplaint();
-    alert("Success");
-    console.log("submitted");
+    if (orderId != 0) {
+      if (complaint != null) {
+        axiosPostComplaint();
+        alert("Success");
+      } else {
+        alert("Complaint field is blank")
+      }
+    }
+    else {
+      alert("You must fill the form first")
+    }
   };
 
   const refreshPage = () => {
@@ -63,77 +71,84 @@ function RaiseComplaint() {
       <Navbar />
       <div id="rc">
         <div className="container" style={{ padding: "14px" }}>
-          <form onSubmit={handleSubmit}>
-            <div class="form-group">
-              <label for="exampleInputEmail1">Order Id : </label>
-              <input
-                type="text"
-                class="form-control"
-                value={orderIdComplaint}
-                // placeholder={orderIdComplaint}
-                onChange={e => setOrderId(e.target.value)}
-              />
-            </div>
-            <div class="form-group">
-              <label>Enter Complaint: </label>
-              <textarea
-                class="form-control"
-                placeholder={complaint}
-                onChange={e => setComplaint(e.target.value)}
-              />
-            </div>
-            <button type="submit" class="btn btn-primary">
-              Submit
-            </button>
+          <div>{user == "test" ? (<h1>Sorry, No Active Complaints</h1>) : (
+            <div>
+              <h1>Add your Complaints here </h1>
+              <form onSubmit={handleSubmit}>
+                <div class="form-group">
+                  <label for="exampleInputEmail1">Order Id : </label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    value={orderIdComplaint}
+                    // placeholder={orderIdComplaint}
+                    onChange={e => setOrderId(e.target.value)}
+                  />
+                </div>
+                <div class="form-group">
+                  <label>Enter Complaint: </label>
+                  <textarea
+                    class="form-control"
+                    // placeholder="Complaint"
+                    onChange={e => setComplaint(e.target.value)}
+                  />
+                </div>
+                <button type="submit" class="btn btn-primary">
+                  Submit
+                </button>
 
-          </form>
+              </form>
 
-          <table class="table align-middle table-hover" style={{ marginTop: "30px" }}>
-            <thead>
-              <tr>
-                <th scope="col">ID</th>
-                <th scope="col">Message</th>
-                <th scope="col">Status</th>
-                <th scope="col">Order ID</th>
-                <th scope="col">Action</th>
-              </tr>
-            </thead>
-            <tbody>
+              <table class="table align-middle table-hover" style={{ marginTop: "30px" }}>
+                <thead>
+                  <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Message</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Order ID</th>
+                    {/* <th scope="col">Action</th> */}
+                  </tr>
+                </thead>
+                <tbody>
 
-              {!loading ? (
-                complaints.map((data) => (
+                  {!loading ? (
+                    complaints.map((data) => (
 
-                  // const { compId, compMessage, compStatus, orderId } = data;
+                      // const { compId, compMessage, compStatus, orderId } = data;
 
-                  // return (
+                      // return (
 
-                  <>
-                    <tr>
-                      <th scope="row">{data.compId}</th>
-                      <td>{data.compMessage}</td>
-                      {/* <td>{data.compStatus ? "✔️Resolved" : "⚠️Pending"}</td> */}
-                      <td>{data.compStatus ? "✔️" : "⚠️"}</td>
-                      <td>{data.orderId}</td>
-                      <td>
+                      <>
+                        <tr>
+                          <th scope="row">{data.compId}</th>
+                          <td>{data.compMessage}</td>
+                          {/* <td>{data.compStatus ? "✔️Resolved" : "⚠️Pending"}</td> */}
+                          <td>{data.compStatus ? "✔️" : "⚠️"}</td>
+                          <td>{data.orderId}</td>
+                          {/* <td>
                         <button type="button" class="btn btn-danger btn-sm px-3">
                           <i class="fas fa-times"></i>
                         </button>
-                      </td>
-                    </tr>
+                      </td> */}
+                        </tr>
 
-                  </>
-                  // );
-                ))
+                      </>
+                      // );
+                    ))
 
-              ) : (
-                <div class="spinner-border" role="status">
-                  <span class="visually-hidden">Loading...</span>
-                </div>
-                // <h4>Loading...</h4>
-              )}
-            </tbody>
-          </table>
+                  ) : (
+                    <div class="spinner-border" role="status">
+                      <span class="visually-hidden">Loading...</span>
+                    </div>
+                    // <h4>Loading...</h4>
+                  )}
+                </tbody>
+              </table>
 
+
+            </div>
+
+          )}</div>
 
         </div>
       </div>

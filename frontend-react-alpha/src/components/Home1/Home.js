@@ -53,30 +53,30 @@ export default function Home() {
         <div class="card-group">
   
             <div class="row">
-                <div class="card col-md-4 bg-image hover-zoom">
+                <div class="card col-md-4">
                     <img class="card-img-top" src="https://cdn.shopify.com/s/files/1/0583/3175/8777/products/15717564774-600x600.jpg?v=1635923549"/>
   
                     <div class="card-body">
                         <h5 class="card-title">Birthday Combo</h5>
-                        {/* <p class="card-text">Rs. 2,312</p> */}
+                        <p class="card-text">Rs. 2,312</p>
                     </div>
                 </div>
   
-                <div class="card col-md-4 bg-image hover-zoom">
+                <div class="card col-md-4">
                     <img class="card-img-top" src="https://cdn.shopify.com/s/files/1/0583/3175/8777/products/IMG_8861-600x600_360x.jpg?v=1635923587"/>
                       
                     <div class="card-body">
                         <h5 class="card-title">Chocolate Tower</h5>
-                        {/* <p class="card-text">Rs. 2,321</p> */}
+                        <p class="card-text">Rs. 2,321</p>
                     </div>
                 </div>
                   
-                <div class="card col-md-4 bg-image hover-zoom">
+                <div class="card col-md-4">
                     <img class="card-img-top" src="https://cdn.shopify.com/s/files/1/0583/3175/8777/products/907089664104b.jpg?v=1633941465"/>
                       
                     <div class="card-body">
                         <h5 class="card-title">Diwali Ganesha Combo</h5>
-                        {/* <p class="card-text">Rs. 1,299</p> */}
+                        <p class="card-text">Rs. 1,299</p>
                     </div>
                 </div>
             </div>

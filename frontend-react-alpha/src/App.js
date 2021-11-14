@@ -20,13 +20,10 @@ import Signup from "./components/Signup/Signup"
 
 import { useState, createContext } from 'react'
 
-export const url = "http://localhost:8080";
-
 export const userContext = createContext();
 
 function App() {
 
-  // const [url, setUrl] = useState();
   const [user, setUser] = useState("test");
 
   const [productId, setProductId] = useState();

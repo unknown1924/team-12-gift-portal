@@ -1,208 +1,228 @@
-import React, { Component } from "react";
+import React, { useState, useEffect, Component, useContext } from "react";
+import { useForm } from "react-hook-form";
+import axios from "axios";
+import { userContext } from "../../App";
 import Navbar from "../Navbar/Navbar";
-
 /*
 JUST COPY THIS INTO SENDGIFTS it should work
 
-import React, { useContext } from 'react'
 
-const { productIdData, productNameData } = useContext(userContext);
-
-const [productId, setProductId] = productIdData;
-const [productName, setProductName] = productNameData;
 
 */
 
-class SendGift extends Component {
-  constructor() {
-    super();
-    this.state = {
-      input: {},
-      errors: {},
+function SendGift() {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+
+  const { orderIdData, userData, orderIdComplaintData } =
+    useContext(userContext);
+  const [user, setUser] = userData;
+  ///////////////////////////
+  const [order_date, setOrder_date] = useState("");
+  const [gift_id, setGift_id] = useState(0);
+  const [order_Quant, setOrder_Quant] = useState(1);
+  const [rx_address, setRx_address] = useState("");
+  const [rx_phone, setRx_phone] = useState(0);
+  const [surprise, setSurprise] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [isError, setIsError] = useState(false);
+  const [data, setData] = useState(null);
+  const { productIdData, productNameData } = useContext(userContext);
+
+  const [productId, setProductId] = productIdData;
+  const [productName, setProductName] = productNameData;
+
+  const onSubmit = () => {
+    setLoading(true);
+    setIsError(false);
+    const data = {
+      order_date: order_date,
+      gift_id: gift_id,
+      order_Quant: order_Quant,
+      rx_address: rx_address,
+      rx_phone: rx_phone,
+      surprise: surprise,
     };
+    axios
+      .post(`http://localhost:8080/user/${user}/sendGift`, data)
+      .then((res) => {
+        setData(res.data);
+        setOrder_date("");
+        setGift_id(0);
+        setOrder_Quant(0);
+        setRx_address("");
+        setRx_phone(0);
+        setSurprise(false);
+        setLoading(false);
+      })
+      .catch((err) => {
+        setLoading(false);
+        setIsError(true);
+        console.log("user doesn't exist")
+      });
+  };
 
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
+  console.log(user);
+
+  const warningStyle = {
+    color: "#870309"
   }
 
-  handleChange(event) {
-    let input = this.state.input;
-    input[event.target.name] = event.target.value;
-
-    this.setState({
-      input,
-    });
-  }
-
-  handleSubmit(event) {
-    event.preventDefault();
-
-    if (this.validate()) {
-      console.log(this.state);
-
-      let input = {};
-      input["name"] = "";
-      input["email"] = "";
-      input["phone"] = "";
-      input["address"] = "";
-      this.setState({ input: input });
-
-      alert("Demo Form is submited");
-    }
-  }
-  validate() {
-    let input = this.state.input;
-    let errors = {};
-    let isValid = true;
-
-    if (!input["name"]) {
-      isValid = false;
-      errors["name"] = "Please enter your name.";
-    }
-
-    if (!input["email"]) {
-      isValid = false;
-      errors["email"] = "Please enter your email Address.";
-    }
-
-    if (typeof input["email"] !== "undefined") {
-      var pattern = new RegExp(
-        /^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i
-      );
-      if (!pattern.test(input["email"])) {
-        isValid = false;
-        errors["email"] = "Please enter valid email address.";
-      }
-    }
-
-    if (!input["phone"]) {
-      isValid = false;
-      errors["phone"] = "Please enter your phone number.";
-    }
-
-    if (typeof input["phone"] !== "undefined") {
-      var pattern = new RegExp(/^[0-9\b]+$/);
-      if (!pattern.test(input["phone"])) {
-        isValid = false;
-        errors["phone"] = "Please enter only number.";
-      } else if (input["phone"].length !== 10) {
-        isValid = false;
-        errors["phone"] = "Please enter valid phone number.";
-      }
-    }
-
-    if (!input["address"]) {
-      isValid = false;
-      errors["address"] = "Please enter your address.";
-    }
-
-    this.setState({
-      errors: errors,
-    });
-
-    return isValid;
-  }
-
-  render() {
-    return (
-      <>
-        <Navbar />
-        <div id="sgift" style={{ padding: "14px" }}>
+  return (
+    <>
+      <Navbar />
+      <div
+        id="sgift"
+        style={{
+          backgroundColor: "CadetBlue",
+        }}
+      >
         <div className="container">
           <div class="row">
-            <div class="col-sm">
+            <div class="col-sm" style={{ paddingTop: "50px", paddingRight: "50px" }}>
               <aside>
-                <img
-                  className="img-fluid"
-                  src="https://media.istockphoto.com/photos/hands-giving-gift-closeup-picture-id871610664?k=20&m=871610664&s=612x612&w=0&h=_c05JTnGp5ziXNKS0QbQ3bDkvbXcxQVk2JS_bM4Wckc="
-                alt="img" />
+                <img src="https://media.istockphoto.com/photos/hands-giving-gift-closeup-picture-id871610664?k=20&m=871610664&s=612x612&w=0&h=_c05JTnGp5ziXNKS0QbQ3bDkvbXcxQVk2JS_bM4Wckc=" />
               </aside>
             </div>
             <div class="col-sm">
-              <div className="container">
-                <h4>Enter details of gift recipient.</h4>
-                <form onSubmit={this.handleSubmit}>
-                  <div class="form-group">
-                    <label for="name">Name:</label>
-                    <input
-                      type="text"
-                      name="name"
-                      value={this.state.input.name}
-                      onChange={this.handleChange}
-                      class="form-control"
-                      placeholder="Enter name"
-                      id="name"
-                    />
-
-                    <div className="text-danger">{this.state.errors.name}</div>
-                  </div>
-
-                  <div class="form-group">
-                    <label for="email">Email Address:</label>
-                    <input
-                      type="text"
-                      name="email"
-                      value={this.state.input.email}
-                      onChange={this.handleChange}
-                      class="form-control"
-                      placeholder="Enter email"
-                      id="email"
-                    />
-
-                    <div className="text-danger">{this.state.errors.email}</div>
-                  </div>
-
-                  <div class="form-group">
-                    <label for="Phone">Phone:</label>
-                    <input
-                      type="text"
-                      name="phone"
-                      value={this.state.input.phone}
-                      onChange={this.handleChange}
-                      class="form-control"
-                      placeholder="Enter phone"
-                      id="phone"
-                    />
-
-                    <div className="text-danger">{this.state.errors.phone}</div>
-                  </div>
-
-                  <div class="form-group">
-                    <label for="address">Address:</label>
-                    <textarea
-                      name="address"
-                      value={this.state.input.address}
-                      onChange={this.handleChange}
-                      placeholder="Enter address"
-                      class="form-control"
-                    />
-
-                    <div className="text-danger">
-                      {this.state.errors.address}
+              <div style={{paddingTop: "20px"}}>
+                {/* <h1>Send Gift</h1> */}
+                <h5>Your selected product: </h5>
+                <h2 style={{color: "white"}}>{productName}</h2>
+                <h5>Enter details of gift recipient.</h5>
+                <form onSubmit={handleSubmit(onSubmit)}>
+                  {/* <h5 className="d-inline-block mb-3">Send Gift</h5> */}
+                  <div style={{ maxWidth: 350, marginBottom: "80px" }}>
+                    <div classNames="form-group">
+                      <label htmlFor="date">Order Date:</label>
+                      <input
+                        {...register("order_date", {
+                          required: true,
+                        })}
+                        type="datetime-local"
+                        className="form-control"
+                        id="date"
+                        value={order_date}
+                        onChange={(e) => setOrder_date(e.target.value)}
+                      />
+                      {errors.order_date && <p style={warningStyle}>Please specify the order date!</p>}
                     </div>
+                    <div classNames="form-group">
+                      <label htmlFor="giftid" className="mt-2">
+                        Gift ID:
+                      </label>
+                      <input
+                        required
+                        type="number"
+                        className="form-control"
+                        id="giftid"
+                        value={productId}
+                        // placeholder={}
+                        onChange={(e) => setGift_id(e.target.value)}
+                      />
+                    </div>
+                    <div classNames="form-group">
+                      <label htmlFor="quant" className="mt-2">
+                        Order quantity:
+                      </label>
+                      <input
+                        {...register("order_Quant", {
+                          required: true,
+                        })}
+                        type="number"
+                        min="1"
+                        max="10"
+                        className="form-control"
+                        id="quant"
+                        value={order_Quant}
+                        onChange={(e) => setOrder_Quant(e.target.value)}
+                      />
+                      {errors.order_Quant && <p>Please Enter the quantity</p>}
+                    </div>
+                    <div classNames="form-group">
+                      <label htmlFor="addr" className="mt-2">
+                        Address:
+                      </label>
+                      <input
+                        {...register("rx_addr", {
+                          required: true,
+                        })}
+                        type="text"
+                        className="form-control"
+                        id="addr"
+                        value={rx_address}
+                        onChange={(e) => setRx_address(e.target.value)}
+                      />
+                      {errors.rx_addr && (
+                        <p style={warningStyle}>Please Enter the recipient's address</p>
+                      )}
+                    </div>
+                    <div classNames="form-group">
+                      <label htmlFor="phone" className="mt-2">
+                        Recipient's phone number
+                      </label>
+                      <input
+                        {...register("rx_phone", {
+                          required: true,
+                          minLength: 10,
+                          maxLength: 10,
+                        })}
+                        type="number"
+                        className="form-control"
+                        id="phone"
+                        value={rx_phone}
+                        onChange={(e) => setRx_phone(e.target.value)}
+                      />
+                      {errors.rx_phone && (
+                        <p style={warningStyle}>
+                          Please Enter the 10 digit recipient's contact number
+                        </p>
+                      )}
+                    </div>
+                    <div classNames="form-group">
+                      <label htmlFor="surprise" className="mt-2">
+                        Surprise:
+                      </label>
+                      <input
+                        type="text"
+                        className="form-control"
+                        id="surprise"
+                        value={surprise}
+                        onChange={(e) => setSurprise(e.target.value)}
+                      />
+                    </div>
+                    {isError && (
+                      <small className="mt-3 d-inline-block text-danger">
+                        Something went wrong. Please try again later.
+                      </small>
+                    )}
+                    <button
+                      type="submit"
+                      className="btn btn-primary mt-3"
+                      disabled={loading}
+                    >
+                      {loading ? "Loading..." : "Submit"}
+                      {/* Submit */}
+                    </button>
+                    {data && (
+                      <div className="mt-3">
+                        <strong>Output:</strong>
+                        <br />
+                        <pre>{JSON.stringify(data, null, 2)}</pre>
+                      </div>
+                    )}
                   </div>
-                  <div class="form-check">
-                    <input
-                      type="checkbox"
-                      class="form-check-input"
-                      id="exampleCheck1"
-                    />
-                    <label class="form-check-label" for="exampleCheck1">
-                      Send Updates
-                    </label>
-                  </div>
-
-                  <input type="submit" value="Submit" class="btn btn-danger" />
                 </form>
               </div>
             </div>
           </div>
         </div>
       </div>
-      </>
-      
-    );
-  }
+    </>
+  );
 }
 
 export default SendGift;
