@@ -47,7 +47,7 @@ function SendGift() {
       surprise: surprise,
     };
     axios
-      .post(`http://localhost:8080/user/${user}/sendGift`, data)
+      .post(`https://giftshop-1636920008628.azurewebsites.net/user/${user}/sendGift`, data)
       .then((res) => {
         setData(res.data);
         setOrder_date("");
@@ -207,13 +207,13 @@ function SendGift() {
                       {loading ? "Loading..." : "Submit"}
                       {/* Submit */}
                     </button>
-                    {data && (
-                      <div className="mt-3">
-                        <strong>Output:</strong>
-                        <br />
-                        <pre>{JSON.stringify(data, null, 2)}</pre>
-                      </div>
-                    )}
+//                     {data && (
+//                       <div className="mt-3">
+//                         <strong>Output:</strong>
+//                         <br />
+//                         <pre>{JSON.stringify(data, null, 2)}</pre>
+//                       </div>
+//                     )}
                   </div>
                 </form>
               </div>
