@@ -5,7 +5,7 @@ Gift portal React + Spring app for Team 12
 1) AdminController - Handles all admin requests
 2) UserController - Handles all users' (other than the admin) requests
 
-### Steps to deploy your Spring App as an Azure Web App - 
+### Steps to deploy your Spring Boot App as an Azure Web App - 
 1) git clone https://github.com/unknown1924/team-12-gift-portal.git
 2) Make sure that your project has mvn directory containing the maven-wrapper jar file
 3) cd E:\Springboot\team-12-gift-portal\Giftshop (Go to your Maven project directory)
