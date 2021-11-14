@@ -7,11 +7,3 @@ Technologies incorporated:
 3) Database: MongoDB
 4) Deployment: Azure
 
-
-### Steps to Install & Run Frontend-React
-
-1. cd team-12-gift-portal
-2. cd frontend-react-final
-3. npm install
-4. npm start
-
