@@ -15,8 +15,8 @@ function Login() {
   const [loggedIn, setLoggedIn] = loggedInData;
 
   // const [user, setUser] = useState()
-  const [userName, setUserName] = useState('');
-  const [password, setPassword] = useState('');
+  const [userName, setUserName] = useState();
+  const [password, setPassword] = useState();
   const [userList, setUserList] = useState([]);
 
   // const [loggedIn, setLoggedIn] = useState(false);
